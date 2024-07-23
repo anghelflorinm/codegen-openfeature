@@ -1,0 +1,18 @@
+package {{.GoPackage}}
+
+import (
+{{- range $_, $p := SupportImports .Flags}}
+	{{$p}}
+{{- end}}
+)
+
+{{- range .Flags}}
+// {{.Docs}}
+var {{FlagVarName .Name}} = struct {
+    Value providers.{{ProviderType .Type}}    
+}{
+    Value: func(ctx context.Context, client *openfeature.Client) ({{TypeString .Type}}, error) {
+        return client.{{FlagAccessFunc .Type}}(ctx, {{FlagInitParam .Name}}, {{DefaultValueLiteral .}}, openfeature.EvaluationContext{})
+    },
+}
+{{- end}}
