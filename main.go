@@ -27,7 +27,7 @@ func generate(gen generator.Generator) error {
 
 func main() {
 	params := golang.Params{
-		File:      "./test_folder/experiment_plags.go",
+		File:      "./example_go/experiment_flags.go",
 		GoPackage: "experimentflags",
 	}
 	gen := golang.NewGenerator(params)
